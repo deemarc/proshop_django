@@ -31,17 +31,40 @@ function RegisterPage({location, history}) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch((register(name, email, password)))
+
+        if (password != confirmPassword){
+            setMessage('Passwords do not match')
+
+        }else{
+            dispatch((register(name, email, password)))
+        }
+
+        
     }
     return (
         <FormContainer>
-            <h1>Sign In</h1>
+            <h1>Sign Up</h1>
+            {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler}>
+                <Form.Group controlId='name'>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        required
+                        type='name'
+                        placeholder='Enter Name'
+                        value={email}
+                        onChange={(e) => setName(e.target.value)}
+                    >
+                            
+                    </Form.Control>
+                </Form.Group>
+
                 <Form.Group controlId='email'>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
+                        required
                         type='email'
                         placeholder='Enter Email'
                         value={email}
@@ -54,6 +77,7 @@ function RegisterPage({location, history}) {
                 <Form.Group controlId='password'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                        required
                         type='password'
                         placeholder='Enter Password'
                         value={password}
@@ -62,16 +86,30 @@ function RegisterPage({location, history}) {
                             
                     </Form.Control>
                 </Form.Group>
+
+                <Form.Group controlId='passwordConfirm'>
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                        required
+                        type='password'
+                        placeholder='Confirm Password'
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    >
+                            
+                    </Form.Control>
+
+                </Form.Group>
                 <Button type='submit' variant='primary'>
-                    Sign In
+                    Register
                 </Button>
             </Form>
 
             <Row className='py-3'>
                 <Col>
-                    New Customer? <Link
-                    to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-                        Register
+                    Have an Account? <Link
+                    to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+                        Sign In
                     </Link>
                 </Col>
             </Row>
