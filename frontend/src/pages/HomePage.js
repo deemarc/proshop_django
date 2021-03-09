@@ -6,6 +6,8 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {listProducts} from '../actions/productionActions'
 
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
+
 
 function HomePage() {
 
@@ -16,6 +18,13 @@ function HomePage() {
     useEffect(() => {
         dispatch(listProducts())
     }, [dispatch]);
+
+    // useEffect(() => {
+    //     dispatch({
+    //         type: CART_CLEAR_ITEMS,
+    //         payload: []
+    //     })
+    // });
 
 
     return (

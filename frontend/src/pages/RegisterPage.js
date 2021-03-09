@@ -36,6 +36,8 @@ function RegisterPage({location, history}) {
             setMessage('Passwords do not match')
 
         }else{
+            console.log('registering:'+name,'email:'+email)
+            setMessage('')
             dispatch((register(name, email, password)))
         }
 
@@ -54,7 +56,7 @@ function RegisterPage({location, history}) {
                         required
                         type='name'
                         placeholder='Enter Name'
-                        value={email}
+                        value={name}
                         onChange={(e) => setName(e.target.value)}
                     >
                             
