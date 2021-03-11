@@ -9,6 +9,10 @@ djangorestframework = "*"
 django-cors-headers = "*"
 pillow = "*"
 djangorestframework-simplejwt = "*"
+psycopg2-binary = "*"
+boto3 = "*"
+django-storages = "*"
+whitenoise = "*"
 
 [dev-packages]
 

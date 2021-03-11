@@ -27,6 +27,8 @@ SECRET_KEY = 'y3347of06eqd8)*w6c^oihh1o-e!px6*n+-m9!8m0p7lmrlggk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ksher-proshop-demo.herokuapp.com']
+
 ALLOWED_HOSTS = []
 
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'storages',
 
     'base.apps.BaseConfig',
 ]
@@ -81,6 +84,8 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,8 +123,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'proshop',
+        'USER': os.environ["DATABASE_USER"],
+        'PASSWORD': os.environ["DATABASE_PASS"],
+        'HOST': os.environ["HOST"],
+        'PORT': os.environ["PORT"],
     }
 }
 
@@ -165,10 +174,23 @@ MEDIA_URL = "/images/"
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / '../frontend/build/static',
-    BASE_DIR / 'frontend/build/'
+    # BASE_DIR / '../frontend/build/static',
+    # BASE_DIR / 'frontend/build/',
+    os.path.join(os.path.join(BASE_DIR.parent, 'frontend'), 'build', 'static')
 ]
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+AWS_STORAGE_BUCKET_NAME = 'deemarc-proshop-bucket'
+
+if os.getcwd() == '/app':
+    DEBUG = False
