@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'storages',
 
-    'base.apps.BaseConfig',
+    'backend.base.apps.BaseConfig',
 ]
 
 REST_FRAMEWORK = {
