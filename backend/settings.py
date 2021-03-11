@@ -29,8 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ksher-proshop-demo.herokuapp.com']
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
