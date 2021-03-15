@@ -122,7 +122,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'proshop',
+        'NAME':os.environ["DATABASE_NAME"],
         'USER': os.environ["DATABASE_USER"],
         'PASSWORD': os.environ["DATABASE_PASS"],
         'HOST': os.environ["HOST"],
