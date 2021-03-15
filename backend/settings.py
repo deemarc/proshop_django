@@ -127,6 +127,10 @@ DATABASES = {
         'PASSWORD': os.environ["DATABASE_PASS"],
         'HOST': os.environ["HOST"],
         'PORT': os.environ["PORT"],
+         "OPTIONS": {
+            "sslmode": "verify-ca",
+            "sslrootcert": os.path.join(BASE_DIR, "amazon-rds-ca-cert.pem")
+        }
     }
 }
 
