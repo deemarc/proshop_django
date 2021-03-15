@@ -127,12 +127,15 @@ DATABASES = {
         'PASSWORD': os.environ["DATABASE_PASS"],
         'HOST': os.environ["HOST"],
         'PORT': os.environ["PORT"],
-         "OPTIONS": {
-            "sslmode": "verify-ca",
-            "sslrootcert": os.path.join(BASE_DIR, "amazon-rds-ca-cert.pem")
-        }
+        #  "OPTIONS": {
+        #     "sslmode": "verify-ca",
+        #     "sslrootcert": os.path.join(BASE_DIR, "amazon-rds-ca-cert.pem")
+        # }
     }
 }
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
